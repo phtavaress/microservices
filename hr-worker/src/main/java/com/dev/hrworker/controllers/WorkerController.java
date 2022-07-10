@@ -2,6 +2,7 @@ package com.dev.hrworker.controllers;
 
 import com.dev.hrworker.entities.Worker;
 import com.dev.hrworker.repositories.WorkerRepository;
+import com.dev.hrworker.services.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +17,17 @@ import java.util.List;
 public class WorkerController {
 
     @Autowired
-    private WorkerRepository workerRepository;
+    private WorkerService workerService;
 
     @GetMapping
     public ResponseEntity<List<Worker>> findAll() {
-        List<Worker> workers = workerRepository.findAll();
+        List<Worker> workers = workerService.findAll();
         return ResponseEntity.ok(workers);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Worker> findById(@PathVariable Long id) {
-        Worker worker = workerRepository.findById(id).get();
+        Worker worker = workerService.findById(id);
         return ResponseEntity.ok(worker);
     }
 
